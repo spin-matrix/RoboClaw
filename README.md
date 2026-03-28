@@ -11,7 +11,11 @@ RoboClaw核心亮点：
 
 ## 视频演示
 
-http://120.92.138.117:50010/roboclaw/nanobot/-/raw/3f105a7db921799865b7d8e3dd6852e465b360c1/media/intro.mp4
+
+
+https://github.com/user-attachments/assets/42f304bf-9cbf-40d9-931b-e91edf9df7dd
+
+
 
 ## 快速开始
 1. 下载release中的最新版手机端APP
