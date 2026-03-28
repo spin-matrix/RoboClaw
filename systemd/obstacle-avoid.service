@@ -1,0 +1,15 @@
+[Unit]
+Description=Obstacle Avoid
+After=roboclaw.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/unitree/roboclaw/robot/obstacle_avoid
+
+ExecStart=/home/unitree/roboclaw/robot/obstacle_avoid/.venv/bin/python safety_service_notify.py
+
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

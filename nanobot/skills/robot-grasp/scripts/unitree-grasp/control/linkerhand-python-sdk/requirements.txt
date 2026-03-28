@@ -1,0 +1,16 @@
+dm_env
+pexpect
+pyquaternion
+pyagxrobots
+pycryptodome
+ipython
+h5py
+PyYAML
+tqdm
+wandb
+PyQt5
+PyQt5-sip
+pyqtgraph
+dm_control
+matplotlib
+sapien

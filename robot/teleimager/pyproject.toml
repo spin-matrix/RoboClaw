@@ -1,0 +1,43 @@
+[project]
+name = "teleimager"
+version = "1.5.0"
+description = "TeleImager: multi-camera image streaming service for unitree teleoperation"
+authors = [
+    { name = "silencht", email = "silencht@qq.com" }
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+requires-python = ">=3.8,<3.12"
+dependencies = [
+    "logging_mp",
+    "opencv-python",
+    "numpy>=1.21,<2",
+    "psutil",
+    "pyyaml",
+    "pyzmq",
+]
+[project.optional-dependencies]
+# execute pip install -e ".[server]" to install server dependencies
+server = [
+    "aiohttp",
+    "aiortc",
+    "pupil-labs-uvc==1.0.0b7",
+    "pyrealsense2",
+]
+
+[project.urls]
+Homepage = "https://github.com/unitreerobotics/teleimager"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+teleimager-server = "teleimager.image_server:main"
+teleimager-client = "teleimager.image_client:main"

@@ -1,0 +1,17 @@
+[Unit]
+Description=Yolo Detector
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/unitree/roboclaw/nanobot/skills/robot-grasp/scripts
+
+ExecStart=/home/unitree/roboclaw/nanobot/skills/robot-grasp/scripts/.venv/bin/python yolo_detector_service.py
+
+Restart=on-failure
+RestartSec=5
+
+Environment=HOME=/home/unitree
+
+[Install]
+WantedBy=default.target

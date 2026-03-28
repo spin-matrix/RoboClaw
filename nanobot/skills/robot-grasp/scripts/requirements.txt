@@ -1,0 +1,10 @@
+pyrealsense2
+zmq
+fastapi
+uvicorn
+ultralytics
+
+python-can
+
+# casadi
+# pinocchio

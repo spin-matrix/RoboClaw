@@ -1,0 +1,19 @@
+[project]
+name = "grasp"
+version = "0.1.0"
+description = "Grasping skill for the nanobot"
+requires-python = ">=3.8,<3.9"
+dependencies = [
+    "fastapi",
+    "numpy==1.24.4",
+    "teleimager",
+    "torch",
+    "ultralytics",
+    "unitree-sdk2py",
+    "uvicorn",
+]
+
+[tool.uv.sources]
+torch = { url = "https://developer.download.nvidia.cn/compute/redist/jp/v511/pytorch/torch-2.0.0+nv23.05-cp38-cp38-linux_aarch64.whl" }
+teleimager = { path = "../../../../robot/teleimager" }
+unitree-sdk2py = { path = "./third_party/unitree_sdk2_python", editable = true }

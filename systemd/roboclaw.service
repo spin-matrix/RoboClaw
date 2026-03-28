@@ -1,0 +1,18 @@
+[Unit]
+Description=RoboClaw Gateway
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/unitree/roboclaw
+
+ExecStart=/home/unitree/roboclaw/.venv/bin/nanobot gateway
+
+Restart=on-failure
+RestartSec=5
+
+Environment=HOME=/home/unitree
+Environment=PATH=/home/unitree/.local/bin:/usr/local/bin:/usr/bin
+
+[Install]
+WantedBy=default.target

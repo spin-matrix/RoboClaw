@@ -1,0 +1,12 @@
+[project]
+name = "image_client"
+version = "0.1.0"
+description = "teleimager client"
+requires-python = ">=3.8,<3.9"
+dependencies = [
+    "teleimager",
+    "opencv-python-headless"
+]
+
+[tool.uv.sources]
+teleimager = { path = "../../../../robot/teleimager" }

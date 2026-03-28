@@ -1,0 +1,13 @@
+handbag
+bottle
+cup
+bowl
+banana
+apple
+sandwich
+orange
+hot dog
+donut
+mouse
+clock
+teddy bear

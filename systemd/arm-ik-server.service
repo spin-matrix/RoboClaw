@@ -1,0 +1,17 @@
+[Unit]
+Description=Arm Ik Server
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/unitree/roboclaw/nanobot/skills/robot-grasp/scripts
+
+ExecStart=/home/unitree/miniconda3/envs/ik_env/bin/uvicorn arm_ik_server:app --host 0.0.0.0 --port 50021
+
+Restart=on-failure
+RestartSec=5
+
+Environment=HOME=/home/unitree
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,13 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  tags:
+    - nanobot
+  only:
+    - main
+  script:
+    - echo "starting building image..."
+    - docker compose -f docker-compose-dev.yml --env-file .env.docker up -d --build
+    - echo "deploy success!"

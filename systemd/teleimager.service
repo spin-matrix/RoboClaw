@@ -1,0 +1,18 @@
+[Unit]
+Description=Unitree Teleimager
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/unitree/roboclaw/robot/teleimager
+
+ExecStartPre=-/unitree/sbin/mscli stopservice video_hub_pc4
+ExecStart=/home/unitree/roboclaw/robot/teleimager/.venv/bin/teleimager-server --rs
+
+Restart=on-failure
+RestartSec=5
+
+Environment=HOME=/home/unitree
+
+[Install]
+WantedBy=default.target

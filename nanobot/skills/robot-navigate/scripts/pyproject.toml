@@ -1,0 +1,11 @@
+[project]
+name = "slam"
+version = "0.1.0"
+description = "SLAM skill environment for the nanobot"
+requires-python = ">=3.8,<3.9"
+dependencies = [
+    "unitree-sdk2py",
+]
+
+[tool.uv.sources]
+unitree-sdk2py = { path = "../../robot-grasp/scripts/third_party/unitree_sdk2_python", editable = true }
