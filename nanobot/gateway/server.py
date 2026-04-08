@@ -26,10 +26,9 @@ from .routes import skills as skills_routes
 class GatewayServer:
     """FastAPI server for gateway API."""
 
-    def __init__(self, port: int, config: Config):
-        self.config = config
-        self.host = config.gateway.host
-        self.port = port or config.gateway.port
+    def __init__(self, host: str, port: int):
+        self.host = host
+        self.port = port
         self.app = FastAPI(title="Nanobot Gateway")
         self._app_channel = None  # set externally after ChannelManager init
         self._setup_lifespan()

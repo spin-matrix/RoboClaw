@@ -2,6 +2,7 @@
 .assets
 .docs
 .env
+.web
 *.pyc
 dist/
 build/
@@ -23,6 +24,7 @@ botpy.log
 nano.*.save
 .DS_Store
 uv.lock
+.claude/
 nanobot/skills/robot-camera/scripts/record/
 nanobot/skills/robot-navigate/scripts/slam_state.json
 nanobot/skills/robot-navigate/scripts/poses.json

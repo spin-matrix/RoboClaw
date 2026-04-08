@@ -64,7 +64,7 @@ CHAT_COMMANDS: list[ChatCommand] = [
     ChatCommand(name="/new", description="Start a new conversation"),
     ChatCommand(name="/stop", description="Stop the current task"),
     ChatCommand(name="/restart", description="Restart the system"),
-    ChatCommand(name="/config", description="Configure system settings"),
+    ChatCommand(name="/config", description="Configure provider settings"),
     ChatCommand(name="/forget", description="Clear memory"),
     ChatCommand(name="/help", description="Show help information"),
 ]

@@ -1,14 +1,15 @@
 """Request / Response models for the gateway API."""
 
 from datetime import datetime
-from typing import Any
+from typing import Any, TypeVar, Generic
 
 from pydantic import BaseModel, Field
 from sqlmodel import SQLModel, Field as SQLField
 from sqlalchemy import Column, JSON
 
 
-class BaseResponse[D](BaseModel):
+D = TypeVar("D")
+class BaseResponse(BaseModel, Generic[D]):
     code: int = 200
     message: str = "Success"
     data: D | None = None

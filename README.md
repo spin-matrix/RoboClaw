@@ -17,11 +17,7 @@ RoboClaw核心亮点：
 
 ## 视频演示
 
-
-
 https://github.com/user-attachments/assets/42f304bf-9cbf-40d9-931b-e91edf9df7dd
-
-
 
 ## 快速开始
 1. 下载release中的最新版手机端APP
@@ -150,15 +146,18 @@ sh scripts/setup/unitree_g1.sh
 
 ```mermaid
 flowchart TD
-    U[User / Web UI / Chat Channels]
+    U[User / App / Chat Channels]
     G[Gateway API<br/>FastAPI + Routes]
     C[Controller Routes<br/>move / rotate / perform]
     A[Agent Loop<br/>Context + Memory + Tools]
     P[LLM Providers]
-    T[Tool Registry / Skills]
-    H[Unitree G1 Hardware Interface<br/>g1_loco_client / g1_arm_action]
+    T[Tool Registry<br/>Skills / MCP]
+    H[Unitree G1 Hardware Interface]
+    L[Leju Kuavo Hardware Interface]
     I[TeleImager Service]
     O[Obstacle Avoid Service]
+    Y[Yolo Detector Service]
+    R[Arm Ik Service]
     S[systemd Services]
 
     U --> G
@@ -167,11 +166,15 @@ flowchart TD
     A --> P
     A --> T
     C --> H
+    C --> L
     O --> G
     I --> G
-    S --> G
+    R --> G
+    Y --> G
     S --> I
     S --> O
+    S --> R
+    S --> Y
 ```
 
 ## 运行说明

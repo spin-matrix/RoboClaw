@@ -15,6 +15,7 @@ from nanobot.bus.events import OutboundMessage
 from nanobot.bus.queue import MessageBus
 from nanobot.channels.base import BaseChannel
 from nanobot.config.schema import Base
+from nanobot.gateway.server import GatewayServer
 from nanobot.providers.base import LLMProvider
 # from text_cleaner.clean import TextCleaner
 
@@ -84,7 +85,8 @@ _EMOJI_PATTERN = re.compile(
 
 class AppConfig(Base):
     """App channel configuration — HTTP API served through the gateway."""
-
+    host: str = "0.0.0.0"
+    port: int = 18790
     enabled: bool = True
     allow_from: list[str] = Field(default_factory=lambda: ["*"])  # Allowed sender IDs
 
@@ -117,6 +119,21 @@ def _build_provider_list(specs) -> str:
     return "\n".join(lines)
 
 
+def _build_help_text() -> str:
+    """Build help text for the /help command."""
+    lines = [
+        "🤖 roboclaw commands:",
+        "/new — Start a new conversation",
+        "/stop — Stop the current task",
+        "/restart — Restart the bot",
+        "/status — Show bot status",
+        "/config — Configure provider settings",
+        "/forget — Clear memory",
+        "/help — Show available commands",
+    ]
+    return "\n".join(lines)
+
+
 class AppChannel(BaseChannel):
     """HTTP API channel for client apps, driven by the gateway server."""
 
@@ -132,6 +149,7 @@ class AppChannel(BaseChannel):
             config = AppConfig.model_validate(config)
         super().__init__(config, bus)
         self.config: AppConfig = config
+        self._gateway: GatewayServer | None = None  # set by gateway server on startup
         # Per-chat response queues: chat_id -> asyncio.Queue[OutboundMessage]
         self._response_queues: dict[str, asyncio.Queue[OutboundMessage]] = {}
         self._tool_hints: dict[str, str] = {}  # chat_id -> str
@@ -144,6 +162,10 @@ class AppChannel(BaseChannel):
         """Mark the channel as running. HTTP requests are handled by the gateway."""
         self._running = True
         logger.info("App channel started (HTTP API via gateway)")
+        if not self._gateway:
+            self._gateway = GatewayServer(host=self.config.host, port=self.config.port)
+            self._gateway.app_channel = self
+        await self._gateway.serve()
 
     async def stop(self) -> None:
         """Stop the channel."""
@@ -257,6 +279,12 @@ class AppChannel(BaseChannel):
         if text == "/forget":
             result = self._clear_memory()
             await self._config_reply(chat_id, result)
+            return
+
+        # Help — show available commands
+        if text == "/help":
+            help_text = _build_help_text()
+            await self._config_reply(chat_id, help_text)
             return
 
         # If in config mode, route to the config state machine
