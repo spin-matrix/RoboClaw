@@ -1,3 +1,0 @@
-[submodule "third_party/unitree_sdk2_python"]
-	path = third_party/unitree_sdk2_python
-	url = https://github.com/unitreerobotics/unitree_sdk2_python
